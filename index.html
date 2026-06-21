@@ -1,0 +1,1341 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presentasi Smart Warung POS - Rekayasa Perangkat Lunak</title>
+    <!-- Hubungkan ke Style Sheet Lokal -->
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+
+    <!-- -----------------------------------------------------------------
+         1. LOADING SCREEN
+         ----------------------------------------------------------------- -->
+    <div class="loading-screen" id="loading-screen">
+        <div class="spinner"></div>
+        <div class="loading-text">MEMUAT PRESENTASI...</div>
+    </div>
+
+    <!-- -----------------------------------------------------------------
+         2. LEFT SIDEBAR NAVIGATION
+         ----------------------------------------------------------------- -->
+    <aside>
+        <div class="sidebar-header">
+            <div class="logo-area">
+                <div class="logo-icon">POS</div>
+                <div class="logo-text">Kedai Dafo Presentation</div>
+            </div>
+            <button class="toggle-sidebar-btn" id="toggle-sidebar" title="Sembunyikan Sidebar (T)">
+                <svg viewBox="0 0 24 24">
+                    <path d="M15 19l-7-7 7-7" stroke="currentColor" fill="none" stroke-width="2.5" />
+                </svg>
+            </button>
+        </div>
+
+        <nav class="sidebar-menu">
+            <div class="menu-title">Utama</div>
+            <div class="menu-item active" data-slide="slide-home">
+                <svg viewBox="0 0 24 24">
+                    <path
+                        d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                </svg>
+                <span class="menu-item-text">🏠 Home</span>
+            </div>
+            <div class="menu-item" data-slide="slide-latar">
+                <svg viewBox="0 0 24 24">
+                    <path
+                        d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                </svg>
+                <span class="menu-item-text">📖 Latar Belakang</span>
+            </div>
+            <div class="menu-item" data-slide="slide-tujuan">
+                <svg viewBox="0 0 24 24">
+                    <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <path
+                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                </svg>
+                <span class="menu-item-text">🎯 Tujuan</span>
+            </div>
+
+            <div class="menu-title">Desain UML</div>
+            <div class="menu-item" data-slide="slide-usecase">
+                <svg viewBox="0 0 24 24">
+                    <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                    <circle cx="9" cy="7" r="4" />
+                    <path d="M23 21v-2a4 4 0 00-3-3.87" />
+                    <path d="M16 3.13a4 4 0 010 7.75" />
+                </svg>
+                <span class="menu-item-text">📊 Use Case Diagram</span>
+            </div>
+            <div class="menu-item" data-slide="slide-class">
+                <svg viewBox="0 0 24 24">
+                    <rect x="3" y="3" width="7" height="9" rx="1" />
+                    <rect x="14" y="3" width="7" height="5" rx="1" />
+                    <rect x="14" y="12" width="7" height="9" rx="1" />
+                    <rect x="3" y="16" width="7" height="5" rx="1" />
+                </svg>
+                <span class="menu-item-text">🏗 Class Diagram</span>
+            </div>
+
+            <div class="menu-item" data-slide="slide-activity-login" data-submenu="sub-activity">
+                <svg viewBox="0 0 24 24">
+                    <path d="M4 4v5h.582m15.356 2A8.001 8.001 0 1121.21 8H18" />
+                    <path d="M12 8v4l3 3" />
+                </svg>
+                <span class="menu-item-text">🔄 Activity Diagram</span>
+            </div>
+            <div class="submenu" id="sub-activity">
+                <div class="submenu-item active" data-slide="slide-activity-login">Login</div>
+                <div class="submenu-item" data-slide="slide-activity-penjualan">Penjualan</div>
+                <div class="submenu-item" data-slide="slide-activity-laporan">Laporan</div>
+            </div>
+
+            <div class="menu-item" data-slide="slide-sequence-login" data-submenu="sub-sequence">
+                <svg viewBox="0 0 24 24">
+                    <path d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+                </svg>
+                <span class="menu-item-text">🔁 Sequence Diagram</span>
+            </div>
+            <div class="submenu" id="sub-sequence" style="display:none;">
+                <div class="submenu-item" data-slide="slide-sequence-login">Login</div>
+                <div class="submenu-item" data-slide="slide-sequence-penjualan">Penjualan</div>
+                <div class="submenu-item" data-slide="slide-sequence-laporan">Laporan</div>
+            </div>
+
+            <div class="menu-item" data-slide="slide-collab-login" data-submenu="sub-collab">
+                <svg viewBox="0 0 24 24">
+                    <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9" />
+                    <path d="M13.73 21a2 2 0 01-3.46 0" />
+                </svg>
+                <span class="menu-item-text">🤝 Collaboration Diagram</span>
+            </div>
+            <div class="submenu" id="sub-collab" style="display:none;">
+                <div class="submenu-item" data-slide="slide-collab-login">Login</div>
+                <div class="submenu-item" data-slide="slide-collab-penjualan">Penjualan</div>
+                <div class="submenu-item" data-slide="slide-collab-laporan">Laporan</div>
+            </div>
+
+            <div class="menu-item" data-slide="slide-state-login" data-submenu="sub-state">
+                <svg viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="9" />
+                    <path d="M12 8v4l3 3" />
+                </svg>
+                <span class="menu-item-text">⚙ Statechart Diagram</span>
+            </div>
+            <div class="submenu" id="sub-state" style="display:none;">
+                <div class="submenu-item" data-slide="slide-state-login">Login</div>
+                <div class="submenu-item" data-slide="slide-state-penjualan">Penjualan</div>
+                <div class="submenu-item" data-slide="slide-state-laporan">Laporan</div>
+            </div>
+
+            <div class="menu-title">Implementasi & Source</div>
+            <div class="menu-item" data-slide="slide-struktur">
+                <svg viewBox="0 0 24 24">
+                    <path d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
+                </svg>
+                <span class="menu-item-text">💻 Struktur Project</span>
+            </div>
+            <div class="menu-item" data-slide="slide-source">
+                <svg viewBox="0 0 24 24">
+                    <path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                </svg>
+                <span class="menu-item-text">🧠 Source Code</span>
+            </div>
+            <div class="menu-item" data-slide="slide-demo">
+                <svg viewBox="0 0 24 24">
+                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+                    <path d="M8 21h8M12 17v4" />
+                </svg>
+                <span class="menu-item-text">🖥 Implementasi POS</span>
+            </div>
+            <div class="menu-item" data-slide="slide-screenshot">
+                <svg viewBox="0 0 24 24">
+                    <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
+                    <circle cx="12" cy="13" r="4" />
+                </svg>
+                <span class="menu-item-text">📷 Screenshot Galeri</span>
+            </div>
+
+            <div class="menu-title">Akhir</div>
+            <div class="menu-item" data-slide="slide-kesimpulan">
+                <svg viewBox="0 0 24 24">
+                    <path
+                        d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+                </svg>
+                <span class="menu-item-text">📋 Kesimpulan</span>
+            </div>
+            <div class="menu-item" data-slide="slide-terima-kasih">
+                <svg viewBox="0 0 24 24">
+                    <path
+                        d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                </svg>
+                <span class="menu-item-text">🙏 Terima Kasih</span>
+            </div>
+        </nav>
+
+        <div class="sidebar-footer">
+            <div>Rekayasa Perangkat Lunak</div>
+            <div style="color: var(--accent-green); margin-top: 4px;">Kelompok Kedai Dafo</div>
+        </div>
+    </aside>
+
+    <!-- -----------------------------------------------------------------
+         3. MAIN PRESENTATION VIEWER AREA
+         ----------------------------------------------------------------- -->
+    <main>
+        <!-- Horizontal Scroll Progress Indicator -->
+        <div class="progress-bar-container">
+            <div class="progress-bar-fill" id="progress-bar-fill"></div>
+        </div>
+
+        <!-- Floating Navigation Header -->
+        <header class="slide-header">
+            <div class="slide-breadcrumbs">
+                Proyek POS &bull; <span id="breadcrumb-current">Home</span>
+            </div>
+            <div class="slide-controls">
+                <button class="control-btn" id="prev-slide-btn" title="Slide Sebelumnya (Arrow Left)">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M15 19l-7-7 7-7" stroke="currentColor" fill="none" stroke-width="2.5" />
+                    </svg> Prev
+                </button>
+                <span class="slide-progress" id="slide-number">1 / 23</span>
+                <button class="control-btn" id="next-slide-btn" title="Slide Selanjutnya (Arrow Right / Space)">
+                    Next <svg viewBox="0 0 24 24">
+                        <path d="M9 5l7 7-7 7" stroke="currentColor" fill="none" stroke-width="2.5" />
+                    </svg>
+                </button>
+            </div>
+        </header>
+
+        <!-- Slides Wrapper -->
+        <div class="slides-wrapper">
+
+            <!-- BACKGROUND ACCENT BLOB (DECORATIVE) -->
+            <div class="slide-bg-decor">
+                <div class="decor-blob decor-blob-1"></div>
+                <div class="decor-blob decor-blob-2"></div>
+            </div>
+
+            <!-- ==========================================
+                 SLIDE 1: HOME (TITLE SLIDE)
+                 ========================================== -->
+            <div class="slide active" id="slide-home">
+                <div class="slide-content home-slide-content">
+                    <div class="home-hero-badge">TUGAS BESAR REKAYASA PERANGKAT LUNAK</div>
+                    <h1 class="home-title">Sistem Informasi <span>Point of Sale (POS)</span></h1>
+                    <div class="home-tagline">Dokumentasi Komprehensif Perancangan UML dan Implementasi Aplikasi POS
+                        Kedai Dafo</div>
+
+                    <button class="home-start-btn" id="start-btn">Mulai Presentasi &rarr;</button>
+
+                    <div class="home-meta-grid">
+                        <div class="home-meta-item">
+                            <span class="home-meta-label">Mata Kuliah</span>
+                            <span class="home-meta-value">Rekayasa Perangkat Lunak</span>
+                        </div>
+                        <div class="home-meta-item">
+                            <span class="home-meta-label">Kasus Studi</span>
+                            <span class="home-meta-value">Kedai Dafo (Smart Warung)</span>
+                        </div>
+                        <div class="home-meta-item">
+                            <span class="home-meta-label">Platform</span>
+                            <span class="home-meta-value">Python / Flask / SQLite</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==========================================
+                 SLIDE 2: LATAR BELAKANG
+                 ========================================== -->
+            <div class="slide" id="slide-latar">
+                <div class="slide-content unified-slide-layout">
+                    <!-- Top section: Title and subtitle -->
+                    <div class="slide-top-section">
+                        <span class="title-badge">Pendahuluan</span>
+                        <h1 class="slide-title-large">📖 Latar Belakang Masalah</h1>
+                        <p class="slide-subtitle-unified">Mengapa Kedai Dafo membutuhkan digitalisasi operasional
+                            melalui sistem POS terintegrasi?</p>
+                    </div>
+
+                    <!-- Middle section: Content cards and mock placeholder display for Apple aesthetic -->
+                    <div class="slide-middle-section" style="grid-template-columns: 1fr;">
+                        <div class="grid-cards">
+                            <div class="card">
+                                <div class="card-icon">
+                                    <svg viewBox="0 0 24 24">
+                                        <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                </div>
+                                <h3>Pencatatan Transaksi Lambat</h3>
+                                <p>Proses kasir yang masih menggunakan kalkulator manual atau buku kas berpotensi
+                                    menghambat antrean pelanggan pada jam sibuk.</p>
+                            </div>
+                            <div class="card">
+                                <div class="card-icon">
+                                    <svg viewBox="0 0 24 24">
+                                        <path
+                                            d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                                    </svg>
+                                </div>
+                                <h3>Ketidakakuratan Stok</h3>
+                                <p>Tanpa sistem terkomputerisasi, pengurangan stok barang sering kali terlewat,
+                                    menyebabkan kehabisan stok bahan tanpa pemberitahuan dini.</p>
+                            </div>
+                            <div class="card">
+                                <div class="card-icon">
+                                    <svg viewBox="0 0 24 24">
+                                        <path
+                                            d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                                    </svg>
+                                </div>
+                                <h3>Monitoring Keuangan Lemah</h3>
+                                <p>Owner kesulitan merekap total pendapatan harian, laba bersih, serta tren menu
+                                    terlaris secara akurat tanpa kalkulasi manual yang memakan waktu.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bottom navigation -->
+                    <div class="slide-bottom-nav">
+                        <button class="slide-nav-btn slide-btn-prev">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M15 19l-7-7 7-7" stroke="currentColor" fill="none" stroke-width="2.5" />
+                            </svg> Sebelumnya
+                        </button>
+                        <button class="slide-nav-btn slide-btn-next">
+                            Selanjutnya <svg viewBox="0 0 24 24">
+                                <path d="M9 5l7 7-7 7" stroke="currentColor" fill="none" stroke-width="2.5" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==========================================
+                 SLIDE 3: TUJUAN
+                 ========================================== -->
+            <div class="slide" id="slide-tujuan">
+                <div class="slide-content unified-slide-layout">
+                    <div class="slide-top-section">
+                        <span class="title-badge">Solusi & Sasaran</span>
+                        <h1 class="slide-title-large">🎯 Tujuan Pengembangan Sistem</h1>
+                        <p class="slide-subtitle-unified">Solusi digitalisasi "Smart Warung POS" dirancang untuk
+                            menyelesaikan titik kendala utama bisnis.</p>
+                    </div>
+
+                    <div class="slide-middle-section" style="grid-template-columns: 1.1fr 0.9fr;">
+                        <div class="slide-text-card">
+                            <h3>Sasaran Operasional POS</h3>
+                            <ul class="custom-list">
+                                <li>
+                                    <svg viewBox="0 0 24 24">
+                                        <path d="M5 13l4 4L19 7" />
+                                    </svg>
+                                    <span><strong>Efisiensi Kasir:</strong> Menyediakan halaman checkout cepat dengan
+                                        penghitungan total belanja otomatis dan validasi kembalian.</span>
+                                </li>
+                                <li>
+                                    <svg viewBox="0 0 24 24">
+                                        <path d="M5 13l4 4L19 7" />
+                                    </svg>
+                                    <span><strong>Sinkronisasi Inventori Real-Time:</strong> Pengurangan stok otomatis
+                                        setiap kali item terjual dan deteksi stok menipis.</span>
+                                </li>
+                                <li>
+                                    <svg viewBox="0 0 24 24">
+                                        <path d="M5 13l4 4L19 7" />
+                                    </svg>
+                                    <span><strong>Kemudahan Pelaporan Owner:</strong> Laporan transaksi harian otomatis
+                                        dengan statistik omzet dan opsi ekspor PDF.</span>
+                                </li>
+                                <li>
+                                    <svg viewBox="0 0 24 24">
+                                        <path d="M5 13l4 4L19 7" />
+                                    </svg>
+                                    <span><strong>Multi-Role Authentication:</strong> Keamanan akses berbeda antara
+                                        Kasir (hanya transaksi) dan Owner (hak kontrol penuh, stok, & laporan).</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="card"
+                            style="border-left: 4px solid var(--accent-blue); display: flex; flex-direction: column; justify-content: center;">
+                            <h3
+                                style="color: var(--accent-blue); display:flex; align-items:center; gap:8px; font-size: 20px;">
+                                <svg viewBox="0 0 24 24"
+                                    style="width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2.5;">
+                                    <path d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                </svg> Nilai Tambah
+                            </h3>
+                            <p style="margin-top: 10px; font-size: 14px; line-height: 1.6;">Smart Warung POS mengubah
+                                proses administrasi tradisional menjadi berbasis sistem yang cepat, presisi, dan aman.
+                                Meminimalisir deviasi pencatatan keuangan dan memberikan visibilitas operasional penuh
+                                bagi owner dari perangkat mana pun.</p>
+                        </div>
+                    </div>
+
+                    <div class="slide-bottom-nav">
+                        <button class="slide-nav-btn slide-btn-prev"><svg viewBox="0 0 24 24">
+                                <path d="M15 19l-7-7 7-7" stroke="currentColor" fill="none" stroke-width="2.5" />
+                            </svg> Sebelumnya</button>
+                        <button class="slide-nav-btn slide-btn-next">Selanjutnya <svg viewBox="0 0 24 24">
+                                <path d="M9 5l7 7-7 7" stroke="currentColor" fill="none" stroke-width="2.5" />
+                            </svg></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==========================================
+                 SLIDE 4: USE CASE DIAGRAM
+                 ========================================== -->
+            <div class="slide" id="slide-usecase">
+                <div class="slide-content unified-slide-layout">
+                    <div class="slide-top-section">
+                        <span class="title-badge">Pemodelan Sistem</span>
+                        <h1 class="slide-title-large">📊 Use Case Diagram</h1>
+                        <p class="slide-subtitle-unified">Memetakan fungsionalitas sistem yang tersedia bagi
+                            masing-masing aktor (Kasir dan Owner).</p>
+                    </div>
+
+                    <div class="slide-middle-section">
+                        <div class="large-image-container zoomable-trigger" data-img-src="">
+                            <!-- Src disuntik oleh Javascript CONFIG_IMAGES.use_case -->
+                            <img data-image-key="use_case" alt="Use Case Diagram" class="large-display-img">
+                        </div>
+                        <div class="slide-text-card">
+                            <h3>Analisis Fungsional</h3>
+                            <p><strong>Aktor Kasir:</strong> Melakukan Login, input data checkout, mengelola transaksi
+                                kasir, dan mencetak struk transaksi penjualan.</p>
+                            <p><strong>Aktor Owner:</strong> Melakukan Login, mengelola item stok/barang dagangan,
+                                melihat ringkasan dashboard, dan meninjau laporan keuangan bulanan.</p>
+                            <p style="border-top: 1px solid var(--border-color); padding-top: 12px;"><strong>Hubungan
+                                    Sistem:</strong> Use case utama dilindungi oleh relasi
+                                <em>&lt;&lt;include&gt;&gt;</em> login untuk memastikan setiap data transaksional
+                                tercatat atas nama kasir/user yang sah.</p>
+                        </div>
+                    </div>
+
+                    <div class="slide-bottom-nav">
+                        <button class="slide-nav-btn slide-btn-prev"><svg viewBox="0 0 24 24">
+                                <path d="M15 19l-7-7 7-7" stroke="currentColor" fill="none" stroke-width="2.5" />
+                            </svg> Sebelumnya</button>
+                        <button class="slide-nav-btn slide-btn-next">Selanjutnya <svg viewBox="0 0 24 24">
+                                <path d="M9 5l7 7-7 7" stroke="currentColor" fill="none" stroke-width="2.5" />
+                            </svg></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==========================================
+                 SLIDE 5: CLASS DIAGRAM
+                 ========================================== -->
+            <div class="slide" id="slide-class">
+                <div class="slide-content unified-slide-layout">
+                    <div class="slide-top-section">
+                        <span class="title-badge">Struktur Data</span>
+                        <h1 class="slide-title-large">🏗 Class Diagram</h1>
+                        <p class="slide-subtitle-unified">Representasi hubungan antarentitas database relasional SQLite
+                            dalam aplikasi POS.</p>
+                    </div>
+
+                    <div class="slide-middle-section">
+                        <div class="large-image-container zoomable-trigger" data-img-src="">
+                            <img data-image-key="class_diagram" alt="Class Diagram" class="large-display-img">
+                        </div>
+                        <div class="slide-text-card">
+                            <h3>Entitas Utama Database</h3>
+                            <p><strong>User:</strong> Menyimpan username, hashed password, dan hak akses/role
+                                (Kasir/Owner).</p>
+                            <p><strong>Barang:</strong> Menyimpan kode_barang, nama, harga jual, dan jumlah sisa stok.
+                            </p>
+                            <p><strong>Transaksi:</strong> Menyimpan total nominal pembayaran, ID transaksi, status
+                                bayar, dan waktu.</p>
+                            <p><strong>DetailTransaksi:</strong> Menyimpan kaitan relasi multi-barang dalam satu
+                                transaksi (*Many-to-Many*).</p>
+                        </div>
+                    </div>
+
+                    <div class="slide-bottom-nav">
+                        <button class="slide-nav-btn slide-btn-prev"><svg viewBox="0 0 24 24">
+                                <path d="M15 19l-7-7 7-7" stroke="currentColor" fill="none" stroke-width="2.5" />
+                            </svg> Sebelumnya</button>
+                        <button class="slide-nav-btn slide-btn-next">Selanjutnya <svg viewBox="0 0 24 24">
+                                <path d="M9 5l7 7-7 7" stroke="currentColor" fill="none" stroke-width="2.5" />
+                            </svg></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==========================================
+                 SLIDE 6: ACTIVITY DIAGRAM - LOGIN
+                 ========================================== -->
+            <div class="slide" id="slide-activity-login">
+                <div class="slide-content unified-slide-layout">
+                    <div class="slide-top-section">
+                        <span class="title-badge">Proses Bisnis</span>
+                        <h1 class="slide-title-large">🔄 Activity Diagram: Login</h1>
+                        <p class="slide-subtitle-unified">Alur proses validasi kredensial pengguna oleh sistem kasir
+                            POS.</p>
+                    </div>
+
+                    <div class="slide-middle-section">
+                        <div class="large-image-container zoomable-trigger" data-img-src="">
+                            <img data-image-key="activity_login" alt="Activity Diagram Login" class="large-display-img">
+                        </div>
+                        <div class="slide-text-card">
+                            <h3>Deskripsi Alur</h3>
+                            <p>1. User memasukkan username dan password ke form login.</p>
+                            <p>2. Controller memvalidasi username dan password ke database SQLite.</p>
+                            <p>3. Jika data cocok, session diaktifkan dan dialihkan ke dashboard.</p>
+                            <p>4. Jika gagal, memunculkan notifikasi error dan tetap di halaman login.</p>
+                        </div>
+                    </div>
+
+                    <div class="slide-bottom-nav">
+                        <button class="slide-nav-btn slide-btn-prev"><svg viewBox="0 0 24 24">
+                                <path d="M15 19l-7-7 7-7" stroke="currentColor" fill="none" stroke-width="2.5" />
+                            </svg> Sebelumnya</button>
+                        <button class="slide-nav-btn slide-btn-next">Selanjutnya <svg viewBox="0 0 24 24">
+                                <path d="M9 5l7 7-7 7" stroke="currentColor" fill="none" stroke-width="2.5" />
+                            </svg></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==========================================
+                 SLIDE 7: ACTIVITY DIAGRAM - PENJUALAN
+                 ========================================== -->
+            <div class="slide" id="slide-activity-penjualan">
+                <div class="slide-content unified-slide-layout">
+                    <div class="slide-top-section">
+                        <span class="title-badge">Proses Bisnis</span>
+                        <h1 class="slide-title-large">🔄 Activity Diagram: Penjualan</h1>
+                        <p class="slide-subtitle-unified">Alur operasional kasir dalam memproses checkout belanjaan
+                            barang.</p>
+                    </div>
+
+                    <div class="slide-middle-section">
+                        <div class="large-image-container zoomable-trigger" data-img-src="">
+                            <img data-image-key="activity_penjualan" alt="Activity Diagram Penjualan"
+                                class="large-display-img">
+                        </div>
+                        <div class="slide-text-card">
+                            <h3>Deskripsi Alur</h3>
+                            <p>1. Kasir memindai barcode produk atau memilih item.</p>
+                            <p>2. Sistem menghitung subtotal belanja otomatis.</p>
+                            <p>3. Kasir memproses transaksi dengan memilih metode pembayaran.</p>
+                            <p>4. Setelah pembayaran terverifikasi, stok barang otomatis dikurangi dan struk kasir
+                                dicetak.</p>
+                        </div>
+                    </div>
+
+                    <div class="slide-bottom-nav">
+                        <button class="slide-nav-btn slide-btn-prev"><svg viewBox="0 0 24 24">
+                                <path d="M15 19l-7-7 7-7" stroke="currentColor" fill="none" stroke-width="2.5" />
+                            </svg> Sebelumnya</button>
+                        <button class="slide-nav-btn slide-btn-next">Selanjutnya <svg viewBox="0 0 24 24">
+                                <path d="M9 5l7 7-7 7" stroke="currentColor" fill="none" stroke-width="2.5" />
+                            </svg></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==========================================
+                 SLIDE 8: ACTIVITY DIAGRAM - LAPORAN
+                 ========================================== -->
+            <div class="slide" id="slide-activity-laporan">
+                <div class="slide-content unified-slide-layout">
+                    <div class="slide-top-section">
+                        <span class="title-badge">Proses Bisnis</span>
+                        <h1 class="slide-title-large">🔄 Activity Diagram: Laporan</h1>
+                        <p class="slide-subtitle-unified">Alur owner dalam menarik statistik laporan keuangan.</p>
+                    </div>
+
+                    <div class="slide-middle-section">
+                        <div class="large-image-container zoomable-trigger" data-img-src="">
+                            <img data-image-key="activity_laporan" alt="Activity Diagram Laporan"
+                                class="large-display-img">
+                        </div>
+                        <div class="slide-text-card">
+                            <h3>Deskripsi Alur</h3>
+                            <p>1. Owner menavigasi ke menu Laporan pada sidebar admin.</p>
+                            <p>2. Menentukan filter jangka waktu (tanggal awal dan akhir).</p>
+                            <p>3. Controller meminta data transaksi ke database.</p>
+                            <p>4. Sistem merender grafik profit dan data tabel transaksi lengkap dengan fitur ekspor
+                                PDF.</p>
+                        </div>
+                    </div>
+
+                    <div class="slide-bottom-nav">
+                        <button class="slide-nav-btn slide-btn-prev"><svg viewBox="0 0 24 24">
+                                <path d="M15 19l-7-7 7-7" stroke="currentColor" fill="none" stroke-width="2.5" />
+                            </svg> Sebelumnya</button>
+                        <button class="slide-nav-btn slide-btn-next">Selanjutnya <svg viewBox="0 0 24 24">
+                                <path d="M9 5l7 7-7 7" stroke="currentColor" fill="none" stroke-width="2.5" />
+                            </svg></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==========================================
+                 SLIDE 9: SEQUENCE DIAGRAM - LOGIN
+                 ========================================== -->
+            <div class="slide" id="slide-sequence-login">
+                <div class="slide-content unified-slide-layout">
+                    <div class="slide-top-section">
+                        <span class="title-badge">Interaksi Objek</span>
+                        <h1 class="slide-title-large">🔁 Sequence Diagram: Login</h1>
+                        <p class="slide-subtitle-unified">Pesan sekuensial antarmuka selama proses login autentikasi
+                            pengguna.</p>
+                    </div>
+
+                    <div class="slide-middle-section">
+                        <div class="large-image-container zoomable-trigger" data-img-src="">
+                            <img data-image-key="sequence_login" alt="Sequence Diagram Login" class="large-display-img">
+                        </div>
+                        <div class="slide-text-card">
+                            <h3>Interaksi Sekuensial</h3>
+                            <p>Menggambarkan bagaimana objek `LoginForm` (Boundary), `AuthController` (Control), dan
+                                tabel `User` (Entity) berinteraksi untuk melakukan pengecekan hashing password sebelum
+                                memberikan otorisasi dashboard.</p>
+                        </div>
+                    </div>
+
+                    <div class="slide-bottom-nav">
+                        <button class="slide-nav-btn slide-btn-prev"><svg viewBox="0 0 24 24">
+                                <path d="M15 19l-7-7 7-7" stroke="currentColor" fill="none" stroke-width="2.5" />
+                            </svg> Sebelumnya</button>
+                        <button class="slide-nav-btn slide-btn-next">Selanjutnya <svg viewBox="0 0 24 24">
+                                <path d="M9 5l7 7-7 7" stroke="currentColor" fill="none" stroke-width="2.5" />
+                            </svg></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==========================================
+                 SLIDE 10: SEQUENCE DIAGRAM - PENJUALAN
+                 ========================================== -->
+            <div class="slide" id="slide-sequence-penjualan">
+                <div class="slide-content unified-slide-layout">
+                    <div class="slide-top-section">
+                        <span class="title-badge">Interaksi Objek</span>
+                        <h1 class="slide-title-large">🔁 Sequence Diagram: Penjualan</h1>
+                        <p class="slide-subtitle-unified">Pesan sekuensial antarmuka selama pembuatan transaksi dan
+                            pembayaran.</p>
+                    </div>
+
+                    <div class="slide-middle-section">
+                        <div class="large-image-container zoomable-trigger" data-img-src="">
+                            <img data-image-key="sequence_penjualan" alt="Sequence Diagram Pembayaran"
+                                class="large-display-img">
+                        </div>
+                        <div class="slide-text-card">
+                            <h3>Interaksi Sekuensial</h3>
+                            <p>Visualisasi urutan pemanggilan API checkout belanja: penambahan item, kalkulasi sisa stok
+                                barang pada database, penyimpanan data pembayaran transaksi, hingga output respons cetak
+                                bukti struk fisik.</p>
+                        </div>
+                    </div>
+
+                    <div class="slide-bottom-nav">
+                        <button class="slide-nav-btn slide-btn-prev"><svg viewBox="0 0 24 24">
+                                <path d="M15 19l-7-7 7-7" stroke="currentColor" fill="none" stroke-width="2.5" />
+                            </svg> Sebelumnya</button>
+                        <button class="slide-nav-btn slide-btn-next">Selanjutnya <svg viewBox="0 0 24 24">
+                                <path d="M9 5l7 7-7 7" stroke="currentColor" fill="none" stroke-width="2.5" />
+                            </svg></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==========================================
+                 SLIDE 11: SEQUENCE DIAGRAM - LAPORAN
+                 ========================================== -->
+            <div class="slide" id="slide-sequence-laporan">
+                <div class="slide-content unified-slide-layout">
+                    <div class="slide-top-section">
+                        <span class="title-badge">Interaksi Objek</span>
+                        <h1 class="slide-title-large">🔁 Sequence Diagram: Laporan</h1>
+                        <p class="slide-subtitle-unified">Pesan sekuensial antarmuka penarikan data laporan oleh admin
+                            owner.</p>
+                    </div>
+
+                    <div class="slide-middle-section">
+                        <div class="large-image-container zoomable-trigger" data-img-src="">
+                            <img data-image-key="sequence_laporan" alt="Sequence Diagram Laporan"
+                                class="large-display-img">
+                        </div>
+                        <div class="slide-text-card">
+                            <h3>Interaksi Sekuensial</h3>
+                            <p>Menjelaskan pemrosesan filter tanggal dari admin panel menuju `ReportController`, query
+                                data agregat transaksi bulanan, hingga perangkaian data ke tabel visual dan unduh PDF.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="slide-bottom-nav">
+                        <button class="slide-nav-btn slide-btn-prev"><svg viewBox="0 0 24 24">
+                                <path d="M15 19l-7-7 7-7" stroke="currentColor" fill="none" stroke-width="2.5" />
+                            </svg> Sebelumnya</button>
+                        <button class="slide-nav-btn slide-btn-next">Selanjutnya <svg viewBox="0 0 24 24">
+                                <path d="M9 5l7 7-7 7" stroke="currentColor" fill="none" stroke-width="2.5" />
+                            </svg></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==========================================
+                 SLIDE 12: COLLABORATION DIAGRAM - LOGIN
+                 ========================================== -->
+            <div class="slide" id="slide-collab-login">
+                <div class="slide-content unified-slide-layout">
+                    <div class="slide-top-section">
+                        <span class="title-badge">Kolaborasi Objek</span>
+                        <h1 class="slide-title-large">🤝 Collaboration Diagram: Login</h1>
+                        <p class="slide-subtitle-unified">Visualisasi spasial kolaborasi antar komponen selama
+                            autentikasi.</p>
+                    </div>
+
+                    <div class="slide-middle-section">
+                        <div class="large-image-container zoomable-trigger" data-img-src="">
+                            <img data-image-key="collaboration_login" alt="Collaboration Login"
+                                class="large-display-img">
+                        </div>
+                        <div class="slide-text-card">
+                            <h3>Analisis Kolaborasi</h3>
+                            <p>Menampilkan susunan struktural objek login. Fokus utama adalah pada asosiasi statis antar
+                                objek form login kasir/owner, objek pengontrol session, dan entity database user.</p>
+                        </div>
+                    </div>
+
+                    <div class="slide-bottom-nav">
+                        <button class="slide-nav-btn slide-btn-prev"><svg viewBox="0 0 24 24">
+                                <path d="M15 19l-7-7 7-7" stroke="currentColor" fill="none" stroke-width="2.5" />
+                            </svg> Sebelumnya</button>
+                        <button class="slide-nav-btn slide-btn-next">Selanjutnya <svg viewBox="0 0 24 24">
+                                <path d="M9 5l7 7-7 7" stroke="currentColor" fill="none" stroke-width="2.5" />
+                            </svg></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==========================================
+                 SLIDE 13: COLLABORATION DIAGRAM - PENJUALAN
+                 ========================================== -->
+            <div class="slide" id="slide-collab-penjualan">
+                <div class="slide-content unified-slide-layout">
+                    <div class="slide-top-section">
+                        <span class="title-badge">Kolaborasi Objek</span>
+                        <h1 class="slide-title-large">🤝 Collaboration Diagram: Penjualan</h1>
+                        <p class="slide-subtitle-unified">Kolaborasi antar objek saat memproses pemesanan barang.</p>
+                    </div>
+
+                    <div class="slide-middle-section">
+                        <div class="large-image-container zoomable-trigger" data-img-src="">
+                            <img data-image-key="collaboration_penjualan" alt="Collaboration Penjualan"
+                                class="large-display-img">
+                        </div>
+                        <div class="slide-text-card">
+                            <h3>Analisis Kolaborasi</h3>
+                            <p>Memetakan hubungan runtime antar objek keranjang belanja, barang yang dipilih, transaksi,
+                                serta printer thermal kasir untuk menghasilkan struk tanda terima secara kolaboratif.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="slide-bottom-nav">
+                        <button class="slide-nav-btn slide-btn-prev"><svg viewBox="0 0 24 24">
+                                <path d="M15 19l-7-7 7-7" stroke="currentColor" fill="none" stroke-width="2.5" />
+                            </svg> Sebelumnya</button>
+                        <button class="slide-nav-btn slide-btn-next">Selanjutnya <svg viewBox="0 0 24 24">
+                                <path d="M9 5l7 7-7 7" stroke="currentColor" fill="none" stroke-width="2.5" />
+                            </svg></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==========================================
+                 SLIDE 14: COLLABORATION DIAGRAM - LAPORAN
+                 ========================================== -->
+            <div class="slide" id="slide-collab-laporan">
+                <div class="slide-content unified-slide-layout">
+                    <div class="slide-top-section">
+                        <span class="title-badge">Kolaborasi Objek</span>
+                        <h1 class="slide-title-large">🤝 Collaboration Diagram: Laporan</h1>
+                        <p class="slide-subtitle-unified">Kolaborasi antar objek dalam merangkum omzet penjualan.</p>
+                    </div>
+
+                    <div class="slide-middle-section">
+                        <div class="large-image-container zoomable-trigger" data-img-src="">
+                            <img data-image-key="collaboration_laporan" alt="Collaboration Laporan"
+                                class="large-display-img">
+                        </div>
+                        <div class="slide-text-card">
+                            <h3>Analisis Kolaborasi</h3>
+                            <p>Menggambarkan keterkaitan objek diagram grafik admin, objek tabel data laporan, dan
+                                database helper saat merangkum data penjualan berdasarkan periode tertentu.</p>
+                        </div>
+                    </div>
+
+                    <div class="slide-bottom-nav">
+                        <button class="slide-nav-btn slide-btn-prev"><svg viewBox="0 0 24 24">
+                                <path d="M15 19l-7-7 7-7" stroke="currentColor" fill="none" stroke-width="2.5" />
+                            </svg> Sebelumnya</button>
+                        <button class="slide-nav-btn slide-btn-next">Selanjutnya <svg viewBox="0 0 24 24">
+                                <path d="M9 5l7 7-7 7" stroke="currentColor" fill="none" stroke-width="2.5" />
+                            </svg></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==========================================
+                 SLIDE 15: STATECHART DIAGRAM - LOGIN
+                 ========================================== -->
+            <div class="slide" id="slide-state-login">
+                <div class="slide-content unified-slide-layout">
+                    <div class="slide-top-section">
+                        <span class="title-badge">Status Entitas</span>
+                        <h1 class="slide-title-large">⚙ Statechart Diagram: Login</h1>
+                        <p class="slide-subtitle-unified">Perubahan status internal sistem autentikasi kasir.</p>
+                    </div>
+
+                    <div class="slide-middle-section">
+                        <div class="large-image-container zoomable-trigger" data-img-src="">
+                            <img data-image-key="state_login" alt="State Login" class="large-display-img">
+                        </div>
+                        <div class="slide-text-card">
+                            <h3>Status Transisi</h3>
+                            <p><strong>Idle State:</strong> Menunggu input kredensial.</p>
+                            <p><strong>Validating State:</strong> Proses verifikasi password.</p>
+                            <p><strong>Authorized State:</strong> Akses diberikan ke menu dashboard.</p>
+                            <p><strong>Error Display State:</strong> Menampilkan pesan kesalahan jika verifikasi gagal.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="slide-bottom-nav">
+                        <button class="slide-nav-btn slide-btn-prev"><svg viewBox="0 0 24 24">
+                                <path d="M15 19l-7-7 7-7" stroke="currentColor" fill="none" stroke-width="2.5" />
+                            </svg> Sebelumnya</button>
+                        <button class="slide-nav-btn slide-btn-next">Selanjutnya <svg viewBox="0 0 24 24">
+                                <path d="M9 5l7 7-7 7" stroke="currentColor" fill="none" stroke-width="2.5" />
+                            </svg></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==========================================
+                 SLIDE 16: STATECHART DIAGRAM - PENJUALAN
+                 ========================================== -->
+            <div class="slide" id="slide-state-penjualan">
+                <div class="slide-content unified-slide-layout">
+                    <div class="slide-top-section">
+                        <span class="title-badge">Status Entitas</span>
+                        <h1 class="slide-title-large">⚙ Statechart Diagram: Penjualan</h1>
+                        <p class="slide-subtitle-unified">Perubahan status transaksi belanja dalam sistem kasir.</p>
+                    </div>
+
+                    <div class="slide-middle-section">
+                        <div class="large-image-container zoomable-trigger" data-img-src="">
+                            <img data-image-key="state_penjualan" alt="State Penjualan" class="large-display-img">
+                        </div>
+                        <div class="slide-text-card">
+                            <h3>Status Transisi</h3>
+                            <p><strong>Empty State:</strong> Keranjang belanja kasir masih kosong.</p>
+                            <p><strong>Item Active:</strong> Barang ditambahkan ke dalam daftar keranjang.</p>
+                            <p><strong>Awaiting Payment:</strong> Menunggu pelanggan menyelesaikan transfer/pembayaran.
+                            </p>
+                            <p><strong>Paid State:</strong> Pembayaran lunas, transaksi disimpan permanen.</p>
+                        </div>
+                    </div>
+
+                    <div class="slide-bottom-nav">
+                        <button class="slide-nav-btn slide-btn-prev"><svg viewBox="0 0 24 24">
+                                <path d="M15 19l-7-7 7-7" stroke="currentColor" fill="none" stroke-width="2.5" />
+                            </svg> Sebelumnya</button>
+                        <button class="slide-nav-btn slide-btn-next">Selanjutnya <svg viewBox="0 0 24 24">
+                                <path d="M9 5l7 7-7 7" stroke="currentColor" fill="none" stroke-width="2.5" />
+                            </svg></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==========================================
+                 SLIDE 17: STATECHART DIAGRAM - LAPORAN
+                 ========================================== -->
+            <div class="slide" id="slide-state-laporan">
+                <div class="slide-content unified-slide-layout">
+                    <div class="slide-top-section">
+                        <span class="title-badge">Status Entitas</span>
+                        <h1 class="slide-title-large">⚙ Statechart Diagram: Laporan</h1>
+                        <p class="slide-subtitle-unified">Siklus hidup penyusunan rekap laporan keuangan.</p>
+                    </div>
+
+                    <div class="slide-middle-section">
+                        <div class="large-image-container zoomable-trigger" data-img-src="">
+                            <img data-image-key="state_laporan" alt="State Laporan" class="large-display-img">
+                        </div>
+                        <div class="slide-text-card">
+                            <h3>Status Transisi</h3>
+                            <p><strong>Unfiltered State:</strong> Halaman laporan default (tanpa filter tanggal).</p>
+                            <p><strong>Loading State:</strong> Proses query database sedang berjalan.</p>
+                            <p><strong>Rendered State:</strong> Statistik terisi dengan data omzet.</p>
+                            <p><strong>Exporting State:</strong> Pengunduhan dokumen cetak PDF.</p>
+                        </div>
+                    </div>
+
+                    <div class="slide-bottom-nav">
+                        <button class="slide-nav-btn slide-btn-prev"><svg viewBox="0 0 24 24">
+                                <path d="M15 19l-7-7 7-7" stroke="currentColor" fill="none" stroke-width="2.5" />
+                            </svg> Sebelumnya</button>
+                        <button class="slide-nav-btn slide-btn-next">Selanjutnya <svg viewBox="0 0 24 24">
+                                <path d="M9 5l7 7-7 7" stroke="currentColor" fill="none" stroke-width="2.5" />
+                            </svg></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==========================================
+                 SLIDE 18: STRUKTUR PROJECT
+                 ========================================== -->
+            <div class="slide" id="slide-struktur">
+                <div class="slide-content unified-slide-layout">
+                    <div class="slide-top-section">
+                        <span class="title-badge">Implementasi</span>
+                        <h1 class="slide-title-large">💻 Struktur Folder Project</h1>
+                        <p class="slide-subtitle-unified">Arsitektur repositori kode berbasis Flask Framework
+                            (Python/SQLite).</p>
+                    </div>
+
+                    <!-- Layout side-by-side: Folder tree dan Screenshot folder tree -->
+                    <div class="slide-middle-section" style="grid-template-columns: 1fr 1fr;">
+                        <div class="tree-container">
+                            <div class="tree-node">
+                                <span class="tree-icon tree-icon-folder">&#128193;</span>
+                                <span class="tree-name">POS/</span>
+                                <span class="tree-desc">Root folder proyek</span>
+                            </div>
+                            <div class="tree-node">
+                                <span class="tree-indent"></span>
+                                <span class="tree-icon tree-icon-folder">&#128193;</span>
+                                <span class="tree-name">templates/</span>
+                                <span class="tree-desc">HTML views (Jinja2)</span>
+                            </div>
+                            <div class="tree-node">
+                                <span class="tree-indent"></span>
+                                <span class="tree-indent"></span>
+                                <span class="tree-icon tree-icon-html">&#128196;</span>
+                                <span class="tree-name">login.html</span>
+                            </div>
+                            <div class="tree-node">
+                                <span class="tree-indent"></span>
+                                <span class="tree-indent"></span>
+                                <span class="tree-icon tree-icon-html">&#128196;</span>
+                                <span class="tree-name">dashboard.html</span>
+                            </div>
+                            <div class="tree-node">
+                                <span class="tree-indent"></span>
+                                <span class="tree-indent"></span>
+                                <span class="tree-icon tree-icon-html">&#128196;</span>
+                                <span class="tree-name">transaksi.html</span>
+                            </div>
+                            <div class="tree-node">
+                                <span class="tree-indent"></span>
+                                <span class="tree-icon tree-icon-folder">&#128193;</span>
+                                <span class="tree-name">static/</span>
+                                <span class="tree-desc">File CSS & JS</span>
+                            </div>
+                            <div class="tree-node">
+                                <span class="tree-indent"></span>
+                                <span class="tree-icon tree-icon-file" style="color: #3572A5;">&#128196;</span>
+                                <span class="tree-name">app.py</span>
+                                <span class="tree-desc">Controller utama</span>
+                            </div>
+                            <div class="tree-node">
+                                <span class="tree-indent"></span>
+                                <span class="tree-icon tree-icon-file" style="color: #F1E05A;">&#128196;</span>
+                                <span class="tree-name">database.db</span>
+                                <span class="tree-desc">SQLite Database</span>
+                            </div>
+                        </div>
+
+                        <!-- Gambar Besar (Screenshot Struktur Project) -->
+                        <div class="large-image-container zoomable-trigger" data-img-src="">
+                            <img data-image-key="struktur_project" alt="Screenshot Struktur Project"
+                                class="large-display-img">
+                        </div>
+                    </div>
+
+                    <div class="slide-bottom-nav">
+                        <button class="slide-nav-btn slide-btn-prev"><svg viewBox="0 0 24 24">
+                                <path d="M15 19l-7-7 7-7" stroke="currentColor" fill="none" stroke-width="2.5" />
+                            </svg> Sebelumnya</button>
+                        <button class="slide-nav-btn slide-btn-next">Selanjutnya <svg viewBox="0 0 24 24">
+                                <path d="M9 5l7 7-7 7" stroke="currentColor" fill="none" stroke-width="2.5" />
+                            </svg></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==========================================
+                 SLIDE 19: SOURCE CODE
+                 ========================================== -->
+            <div class="slide" id="slide-source">
+                <div class="slide-content unified-slide-layout">
+                    <div class="slide-top-section">
+                        <span class="title-badge">Code Base</span>
+                        <h1 class="slide-title-large">🧠 Source Code Utama</h1>
+                        <p class="slide-subtitle-unified">Cuplikan kode pemrograman inti dari backend Flask dan skema
+                            database.</p>
+                    </div>
+
+                    <!-- Layout side-by-side: Code editor dan Screenshot source code -->
+                    <div class="slide-middle-section" style="grid-template-columns: 1fr 1fr;">
+                        <div class="code-viewer-container">
+                            <div class="code-header">
+                                <div class="code-tabs">
+                                    <div class="code-tab active" data-code-target="app-py">
+                                        <span>app.py</span>
+                                    </div>
+                                    <div class="code-tab" data-code-target="schema-sql">
+                                        <span>schema.sql</span>
+                                    </div>
+                                    <div class="code-tab" data-code-target="checkout-js">
+                                        <span>checkout.js</span>
+                                    </div>
+                                </div>
+                                <div class="code-window-controls">
+                                    <div class="window-dot dot-close"></div>
+                                    <div class="window-dot dot-minimize"></div>
+                                    <div class="window-dot dot-zoom"></div>
+                                </div>
+                            </div>
+                            <div class="code-body" id="code-display"></div>
+                        </div>
+
+                        <!-- Gambar Besar (Screenshot Source Code) -->
+                        <div class="large-image-container zoomable-trigger" data-img-src="">
+                            <img data-image-key="source_code" alt="Screenshot Source Code" class="large-display-img">
+                        </div>
+                    </div>
+
+                    <div class="slide-bottom-nav">
+                        <button class="slide-nav-btn slide-btn-prev"><svg viewBox="0 0 24 24">
+                                <path d="M15 19l-7-7 7-7" stroke="currentColor" fill="none" stroke-width="2.5" />
+                            </svg> Sebelumnya</button>
+                        <button class="slide-nav-btn slide-btn-next">Selanjutnya <svg viewBox="0 0 24 24">
+                                <path d="M9 5l7 7-7 7" stroke="currentColor" fill="none" stroke-width="2.5" />
+                            </svg></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==========================================
+                 SLIDE 20: IMPLEMENTASI APLIKASI
+                 ========================================== -->
+            <div class="slide" id="slide-demo">
+                <div class="slide-content unified-slide-layout">
+                    <div class="slide-top-section">
+                        <span class="title-badge">Live Walkthrough</span>
+                        <h1 class="slide-title-large">🖥 Simulasi Jalannya Aplikasi POS</h1>
+                        <p class="slide-subtitle-unified">Ikuti panduan langkah demi langkah untuk melihat antarmuka
+                            aplikasi POS Kedai Dafo secara real-time.</p>
+                    </div>
+
+                    <div class="slide-middle-section">
+                        <div class="simulator-layout">
+                            <div class="simulator-sidebar">
+                                <div class="simulator-flow-selector">
+                                    <button class="flow-btn active" data-flow="auth">
+                                        <svg viewBox="0 0 24 24">
+                                            <path
+                                                d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                                                stroke="currentColor" fill="none" stroke-width="2" />
+                                        </svg>
+                                        Autentikasi User
+                                    </button>
+                                    <button class="flow-btn" data-flow="transaksi">
+                                        <svg viewBox="0 0 24 24">
+                                            <path
+                                                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+                                                stroke="currentColor" fill="none" stroke-width="2" />
+                                        </svg>
+                                        Modul Transaksi POS
+                                    </button>
+                                    <button class="flow-btn" data-flow="stok">
+                                        <svg viewBox="0 0 24 24">
+                                            <path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"
+                                                stroke="currentColor" fill="none" stroke-width="2" />
+                                        </svg>
+                                        Manajemen Stok
+                                    </button>
+                                    <button class="flow-btn" data-flow="laporan">
+                                        <svg viewBox="0 0 24 24">
+                                            <path
+                                                d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                                                stroke="currentColor" fill="none" stroke-width="2" />
+                                        </svg>
+                                        Modul Laporan
+                                    </button>
+                                </div>
+
+                                <div class="simulator-steps-card">
+                                    <div class="simulator-steps-title" id="sim-steps-title">Autentikasi User</div>
+                                    <div class="simulator-step-list" id="sim-steps-container"></div>
+                                </div>
+                            </div>
+
+                            <div class="simulator-screen">
+                                <div class="screen-topbar">
+                                    <div class="screen-title" id="screen-current-name">Halaman Login Kasir</div>
+                                    <div class="screen-nav-controls">
+                                        <button class="screen-nav-btn" id="sim-prev-btn"><svg viewBox="0 0 24 24">
+                                                <path d="M15 19l-7-7 7-7" stroke="currentColor" fill="none"
+                                                    stroke-width="2.5" />
+                                            </svg></button>
+                                        <button class="screen-nav-btn" id="sim-next-btn"><svg viewBox="0 0 24 24">
+                                                <path d="M9 5l7 7-7 7" stroke="currentColor" fill="none"
+                                                    stroke-width="2.5" />
+                                            </svg></button>
+                                    </div>
+                                </div>
+                                <div class="screen-body zoomable-trigger" id="sim-screen-container" data-img-src="">
+                                    <img id="sim-screen-img" alt="POS Simulator Screen" class="screen-img">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="slide-bottom-nav">
+                        <button class="slide-nav-btn slide-btn-prev"><svg viewBox="0 0 24 24">
+                                <path d="M15 19l-7-7 7-7" stroke="currentColor" fill="none" stroke-width="2.5" />
+                            </svg> Sebelumnya</button>
+                        <button class="slide-nav-btn slide-btn-next">Selanjutnya <svg viewBox="0 0 24 24">
+                                <path d="M9 5l7 7-7 7" stroke="currentColor" fill="none" stroke-width="2.5" />
+                            </svg></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==========================================
+                 SLIDE 21: SCREENSHOT GALERI (GRID)
+                 ========================================== -->
+            <div class="slide" id="slide-screenshot">
+                <div class="slide-content unified-slide-layout">
+                    <div class="slide-top-section">
+                        <span class="title-badge">Dokumentasi</span>
+                        <h1 class="slide-title-large">📷 Screenshot Galeri Aplikasi</h1>
+                        <p class="slide-subtitle-unified">Kumpulan tangkapan layar lengkap dari antarmuka sistem POS
+                            Kedai Dafo.</p>
+                    </div>
+
+                    <div class="slide-middle-section" style="grid-template-columns: 1fr;">
+                        <div class="screenshot-grid">
+                            <div class="screenshot-item zoomable-trigger" data-img-src="">
+                                <div class="screenshot-thumb-box"><img data-image-key="login_kasir"
+                                        class="screenshot-thumb"></div>
+                                <div class="screenshot-label">Login Kasir</div>
+                            </div>
+                            <div class="screenshot-item zoomable-trigger" data-img-src="">
+                                <div class="screenshot-thumb-box"><img data-image-key="login_owner"
+                                        class="screenshot-thumb"></div>
+                                <div class="screenshot-label">Login Owner</div>
+                            </div>
+                            <div class="screenshot-item zoomable-trigger" data-img-src="">
+                                <div class="screenshot-thumb-box"><img
+                                        data-image-key="/asssets/application-screenshots/login_gagal"
+                                        class="screenshot-thumb"></div>
+                                <div class="screenshot-label">Login Gagal</div>
+                            </div>
+                            <div class="screenshot-item zoomable-trigger" data-img-src="">
+                                <div class="screenshot-thumb-box"><img data-image-key="dashboard"
+                                        class="screenshot-thumb"></div>
+                                <div class="screenshot-label">Dashboard Utama</div>
+                            </div>
+                            <div class="screenshot-item zoomable-trigger" data-img-src="">
+                                <div class="screenshot-thumb-box"><img data-image-key="transaksi"
+                                        class="screenshot-thumb"></div>
+                                <div class="screenshot-label">Halaman Transaksi</div>
+                            </div>
+                            <div class="screenshot-item zoomable-trigger" data-img-src="">
+                                <div class="screenshot-thumb-box"><img data-image-key="mtd_bayar"
+                                        class="screenshot-thumb"></div>
+                                <div class="screenshot-label">Pilih Metode Bayar</div>
+                            </div>
+                            <div class="screenshot-item zoomable-trigger" data-img-src="">
+                                <div class="screenshot-thumb-box"><img data-image-key="qris" class="screenshot-thumb">
+                                </div>
+                                <div class="screenshot-label">Bayar via QRIS</div>
+                            </div>
+                            <div class="screenshot-item zoomable-trigger" data-img-src="">
+                                <div class="screenshot-thumb-box"><img data-image-key="transfer"
+                                        class="screenshot-thumb"></div>
+                                <div class="screenshot-label">Bayar via Transfer</div>
+                            </div>
+                            <div class="screenshot-item zoomable-trigger" data-img-src="">
+                                <div class="screenshot-thumb-box"><img data-image-key="bayar_gagal"
+                                        class="screenshot-thumb"></div>
+                                <div class="screenshot-label">Pembayaran Gagal</div>
+                            </div>
+                            <div class="screenshot-item zoomable-trigger" data-img-src="">
+                                <div class="screenshot-thumb-box"><img data-image-key="hasil_bayar"
+                                        class="screenshot-thumb"></div>
+                                <div class="screenshot-label">Pembayaran Berhasil</div>
+                            </div>
+                            <div class="screenshot-item zoomable-trigger" data-img-src="">
+                                <div class="screenshot-thumb-box"><img data-image-key="cetak_struk"
+                                        class="screenshot-thumb"></div>
+                                <div class="screenshot-label">Cetak Struk</div>
+                            </div>
+                            <div class="screenshot-item zoomable-trigger" data-img-src="">
+                                <div class="screenshot-thumb-box"><img data-image-key="stok" class="screenshot-thumb">
+                                </div>
+                                <div class="screenshot-label">Kelola Stok Barang</div>
+                            </div>
+                            <div class="screenshot-item zoomable-trigger" data-img-src="">
+                                <div class="screenshot-thumb-box"><img data-image-key="laporan"
+                                        class="screenshot-thumb"></div>
+                                <div class="screenshot-label">Laporan Transaksi Kasir</div>
+                            </div>
+                            <div class="screenshot-item zoomable-trigger" data-img-src="">
+                                <div class="screenshot-thumb-box"><img data-image-key="laporanowner"
+                                        class="screenshot-thumb"></div>
+                                <div class="screenshot-label">Laporan Dashboard Owner</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="slide-bottom-nav">
+                        <button class="slide-nav-btn slide-btn-prev"><svg viewBox="0 0 24 24">
+                                <path d="M15 19l-7-7 7-7" stroke="currentColor" fill="none" stroke-width="2.5" />
+                            </svg> Sebelumnya</button>
+                        <button class="slide-nav-btn slide-btn-next">Selanjutnya <svg viewBox="0 0 24 24">
+                                <path d="M9 5l7 7-7 7" stroke="currentColor" fill="none" stroke-width="2.5" />
+                            </svg></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==========================================
+                 SLIDE 22: KESIMPULAN
+                 ========================================== -->
+            <div class="slide" id="slide-kesimpulan">
+                <div class="slide-content unified-slide-layout">
+                    <div class="slide-top-section">
+                        <span class="title-badge">Ringkasan</span>
+                        <h1 class="slide-title-large">📋 Kesimpulan Proyek</h1>
+                        <p class="slide-subtitle-unified">Bagaimana pengembangan Smart Warung POS menjawab tantangan
+                            awal di Kedai Dafo.</p>
+                    </div>
+
+                    <div class="slide-middle-section" style="grid-template-columns: 1fr;">
+                        <div class="grid-cards">
+                            <div class="card" style="border-top: 4px solid var(--accent-green);">
+                                <h3>1. Keandalan Model UML</h3>
+                                <p>Seluruh rancangan diagram (Use Case, Class, Activity, Sequence, Collaboration,
+                                    Statechart) terbukti sinkron 100% dengan alur kode program Python Flask yang
+                                    diimplementasikan.</p>
+                            </div>
+                            <div class="card" style="border-top: 4px solid var(--accent-blue);">
+                                <h3>2. Efisiensi & Kecepatan</h3>
+                                <p>Sistem POS berhasil menghilangkan antrean kasir yang padat melalui modul transaksi
+                                    cepat dan integrasi pembayaran modern (QRIS/Transfer/Cash).</p>
+                            </div>
+                            <div class="card" style="border-top: 4px solid var(--accent-green);">
+                                <h3>3. Kontrol Owner Maksimal</h3>
+                                <p>Fitur sinkronisasi stok real-time dan pelaporan keuangan interaktif memberikan
+                                    visibilitas penuh bagi Owner dalam mengawasi profitabilitas Kedai Dafo secara tepat
+                                    waktu.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="slide-bottom-nav">
+                        <button class="slide-nav-btn slide-btn-prev"><svg viewBox="0 0 24 24">
+                                <path d="M15 19l-7-7 7-7" stroke="currentColor" fill="none" stroke-width="2.5" />
+                            </svg> Sebelumnya</button>
+                        <button class="slide-nav-btn slide-btn-next">Selanjutnya <svg viewBox="0 0 24 24">
+                                <path d="M9 5l7 7-7 7" stroke="currentColor" fill="none" stroke-width="2.5" />
+                            </svg></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==========================================
+                 SLIDE 23: TERIMA KASIH (Q&A)
+                 ========================================== -->
+            <div class="slide" id="slide-terima-kasih">
+                <div class="slide-content home-slide-content">
+                    <div class="home-hero-badge"
+                        style="background-color: var(--accent-green-glow); color: var(--accent-green); border-color: rgba(16,185,129,0.2);">
+                        SELESAI</div>
+                    <h1 class="home-title">🙏 Terima Kasih</h1>
+                    <div class="home-tagline" style="margin-bottom: 30px;">Sekian presentasi dari kami mengenai
+                        rancangan dan implementasi POS Kedai Dafo.</div>
+
+                    <button class="home-start-btn"
+                        style="background: var(--bg-secondary); border: 1px solid var(--border-color); color: var(--text-primary); cursor: pointer;"
+                        onclick="window.location.hash = 'slide-home';">Kembali Ke Beranda</button>
+
+                    <div
+                        style="border: 1px solid var(--border-color); background-color: var(--bg-secondary); padding: 20px 40px; border-radius: 12px; font-size: 13.5px; color: var(--text-secondary);">
+                        Rekayasa Perangkat Lunak &bull; Smart Warung POS &bull; Kedai Dafo
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Floating navigation hotkey hints -->
+        <div class="instruction-hint">
+            Navigasi: <span class="hint-key">&larr;</span> / <span class="hint-key">&rarr;</span> / <span
+                class="hint-key">Space</span> &bull; Sidebar: <span class="hint-key">T</span>
+        </div>
+    </main>
+
+    <!-- -----------------------------------------------------------------
+         4. FULLSCREEN LIGHTBOX / ZOOM OVERLAY MODAL
+         ----------------------------------------------------------------- -->
+    <div class="lightbox-overlay" id="lightbox">
+        <button class="lightbox-close-btn" id="lightbox-close" title="Tutup (Esc)">
+            <svg viewBox="0 0 24 24">
+                <path d="M6 18L18 6M6 6l12 12" stroke="currentColor" fill="none" stroke-width="2.5" />
+            </svg>
+        </button>
+
+        <div class="lightbox-container" id="lightbox-container">
+            <img src="" id="lightbox-img" class="lightbox-img" alt="Zoomed Diagram Image">
+        </div>
+
+        <div class="lightbox-toolbar">
+            <div class="lightbox-info" id="lightbox-filename">use case.png</div>
+            <button class="lightbox-tool-btn" id="zoom-out" title="Zoom Out (-)">
+                <svg viewBox="0 0 24 24">
+                    <path d="M20 12H4" stroke="currentColor" fill="none" stroke-width="2.5" />
+                </svg>
+            </button>
+            <div class="lightbox-zoom-val" id="zoom-value">100%</div>
+            <button class="lightbox-tool-btn" id="zoom-in" title="Zoom In (+)">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 4v16m8-8H4" stroke="currentColor" fill="none" stroke-width="2.5" />
+                </svg>
+            </button>
+            <button class="lightbox-tool-btn" id="zoom-reset" title="Reset Zoom (R)"
+                style="border-left: 1px solid var(--border-color); padding-left:15px; margin-left:5px;">
+                <svg viewBox="0 0 24 24">
+                    <path d="M4 4v5h.582m15.356 2A8.001 8.001 0 1121.21 8H18" stroke="currentColor" fill="none"
+                        stroke-width="2" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Hubungkan ke Script JS Lokal -->
+    <script src="script.js"></script>
+</body>
+
+</html>
