@@ -232,6 +232,7 @@ body.sidebar-collapsed .logo-text {
     white-space: nowrap;
     overflow: hidden;
     transition: var(--transition-smooth);
+    flex-shrink: 0;
 }
 
 body.sidebar-collapsed .menu-title {
@@ -253,6 +254,7 @@ body.sidebar-collapsed .menu-title {
     font-size: 13.5px;
     font-weight: 500;
     white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .menu-item svg {
@@ -298,6 +300,7 @@ body.sidebar-collapsed .menu-item-text {
     margin-bottom: 5px;
     overflow: hidden;
     transition: var(--transition-smooth);
+    flex-shrink: 0;
 }
 
 body.sidebar-collapsed .submenu {
