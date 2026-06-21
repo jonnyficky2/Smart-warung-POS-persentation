@@ -1034,12 +1034,14 @@ h1.slide-title-large span {
     grid-template-columns: 270px 1fr;
     gap: 20px;
     height: 100%;
+    min-height: 0;
 }
 
 .simulator-sidebar {
     display: flex;
     flex-direction: column;
     gap: 15px;
+    min-height: 0;
 }
 
 .simulator-flow-selector {
@@ -1096,6 +1098,7 @@ h1.slide-title-large span {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    min-height: 0;
 }
 
 .simulator-steps-title {
@@ -1166,6 +1169,7 @@ h1.slide-title-large span {
     flex-direction: column;
     overflow: hidden;
     box-shadow: var(--card-shadow);
+    min-height: 0;
 }
 
 .screen-topbar {
@@ -1200,6 +1204,7 @@ h1.slide-title-large span {
     overflow: hidden;
     position: relative;
     cursor: zoom-in;
+    min-height: 0;
 }
 
 .screen-img {
