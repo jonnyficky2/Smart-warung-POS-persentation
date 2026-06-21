@@ -23,8 +23,8 @@ const CONFIG_IMAGES = {
     state_laporan: 'assets/statechart-diagram/state_laporan.png',
     
     // --- Struktur & Source Code ---
-    struktur_project: 'assets/object-dokumentation/struktur_project.png', // Tambahkan screenshot struktur folder Anda ke file ini
-    source_code: 'assets/object-dokumentation/source_code.png',           // Tambahkan screenshot source code Anda ke file ini
+    struktur_project: 'assets/application-screenshots/struktur_project_pos.png', // Tambahkan screenshot struktur folder Anda ke file ini
+    source_code: 'assets/application-screenshots/app.png',           // Tambahkan screenshot source code Anda ke file ini
     
     // --- Screenshot Aplikasi POS ---
     login_kasir: 'assets/application-screenshots/login kasir.png',
@@ -101,80 +101,25 @@ app.secret_key = <span class="string">'kedaidafo_secret'</span>
     <span class="keyword">finally</span>:
         conn.close()`,
 
-    'schema-sql': `<span class="keyword">CREATE TABLE</span> <span class="class">user</span> (
-    id <span class="keyword">INTEGER PRIMARY KEY AUTOINCREMENT</span>,
-    username <span class="keyword">TEXT NOT NULL UNIQUE</span>,
-    password <span class="keyword">TEXT NOT NULL</span>,
-    role <span class="keyword">TEXT CHECK</span>(role <span class="keyword">IN</span> (<span class="string">'Kasir'</span>, <span class="string">'Owner'</span>))
-);
+    'init-db': `<span class="keyword">import</span> sqlite3
 
-<span class="keyword">CREATE TABLE</span> <span class="class">barang</span> (
-    kode_barang <span class="keyword">TEXT PRIMARY KEY</span>,
-    nama <span class="keyword">TEXT NOT NULL</span>,
-    harga <span class="keyword">INTEGER NOT NULL</span>,
-    stok <span class="keyword">INTEGER NOT NULL CHECK</span>(stok &gt;= <span class="number">0</span>)
-);
+conn = sqlite3.connect(<span class="string">"database.db"</span>)
 
-<span class="keyword">CREATE TABLE</span> <span class="class">transaksi</span> (
-    id_transaksi <span class="keyword">INTEGER PRIMARY KEY AUTOINCREMENT</span>,
-    total <span class="keyword">INTEGER NOT NULL</span>,
-    tanggal <span class="keyword">TIMESTAMP DEFAULT CURRENT_TIMESTAMP</span>,
-    status_bayar <span class="keyword">TEXT NOT NULL</span>
-);
+cursor = conn.cursor()
 
-<span class="keyword">CREATE TABLE</span> <span class="class">detail_transaksi</span> (
-    id_transaksi <span class="keyword">INTEGER</span>,
-    kode_barang <span class="keyword">TEXT</span>,
-    qty <span class="keyword">INTEGER NOT NULL</span>,
-    <span class="keyword">PRIMARY KEY</span> (id_transaksi, kode_barang),
-    <span class="keyword">FOREIGN KEY</span> (id_transaksi) <span class="keyword">REFERENCES</span> transaksi(id_transaksi),
-    <span class="keyword">FOREIGN KEY</span> (kode_barang) <span class="keyword">REFERENCES</span> barang(kode_barang)
-);`,
+cursor.execute(<span class="string">"""
+CREATE TABLE IF NOT EXISTS transaksi (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    tanggal TEXT,
+    kasir TEXT,
+    total INTEGER
+)
+"""</span>)
 
-    'checkout-js': `<span class="comment">// --- LOGIC SCAN BARCODE & INPUT KERANJANG ---</span>
-<span class="keyword">let</span> keranjang = [];
+conn.commit()
+conn.close()
 
-<span class="keyword">function</span> <span class="function">scanBarang</span>(kodeBarang) {
-    fetch(<span class="string">\`/api/barang/\${kodeBarang}\`</span>)
-        .then(res =&gt; res.json())
-        .then(barang =&gt; {
-            <span class="keyword">if</span> (barang.stok &lt;= <span class="number">0</span>) {
-                alert(<span class="string">'Stok barang habis!'</span>);
-                <span class="keyword">return</span>;
-            }
-            
-            <span class="keyword">let</span> item = keranjang.find(i =&gt; i.kode === kodeBarang);
-            <span class="keyword">if</span> (item) {
-                item.qty++;
-            } <span class="keyword">else</span> {
-                keranjang.push({
-                    kode: barang.kode_barang,
-                    nama: barang.nama,
-                    harga: barang.harga,
-                    qty: <span class="number">1</span>
-                });
-            }
-            renderKeranjang();
-        });
-}
-
-<span class="keyword">function</span> <span class="function">renderKeranjang</span>() {
-    <span class="keyword">const</span> list = document.getElementById(<span class="string">'cart-list'</span>);
-    list.innerHTML = <span class="string">''</span>;
-    <span class="keyword">let</span> total = <span class="number">0</span>;
-    
-    keranjang.forEach(item =&gt; {
-        total += item.harga * item.qty;
-        list.innerHTML += <span class="string">\`
-            &lt;div class="cart-item"&gt;
-                &lt;span&gt;\${item.nama} (x\${item.qty})&lt;/span&gt;
-                &lt;span&gt;Rp \${(item.harga * item.qty).toLocaleString()}&lt;/span&gt;
-            &lt;/div&gt;
-        \`</span>;
-    });
-    
-    document.getElementById(<span class="string">'total-price'</span>).innerText = <span class="string">\`Rp \${total.toLocaleString()}\`</span>;
-}`
+<span class="keyword">print</span>(<span class="string">"Database berhasil dibuat"</span>)`
 };
 
 /* =========================================================================
@@ -433,7 +378,22 @@ document.addEventListener('DOMContentLoaded', () => {
         tab.addEventListener('click', () => {
             codeTabs.forEach(t => t.classList.remove('active'));
             tab.classList.add('active');
-            loadCode(tab.getAttribute('data-code-target'));
+            const target = tab.getAttribute('data-code-target');
+            loadCode(target);
+
+            // Update screenshot image on the right side
+            const sourceCodeImg = document.querySelector('[data-image-key="source_code"]');
+            if (sourceCodeImg) {
+                let imgPath = CONFIG_IMAGES.source_code; // Default for app-py
+                if (target === 'init-db') {
+                    imgPath = 'assets/application-screenshots/init_db.png';
+                }
+                sourceCodeImg.src = imgPath;
+                const trigger = sourceCodeImg.closest('.zoomable-trigger');
+                if (trigger) {
+                    trigger.setAttribute('data-img-src', imgPath);
+                }
+            }
         });
     });
 
