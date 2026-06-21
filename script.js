@@ -125,41 +125,35 @@ conn.close()
 /* =========================================================================
    3. CONFIGURATION FOR INTERACTIVE POS SIMULATOR
    ========================================================================= */
-const simulatorFlows = {
-    'auth': {
-        title: 'Autentikasi User (Multi-Role)',
-        steps: [
-            { name: 'Login Kasir', key: 'login_kasir', desc: 'Kasir masuk menggunakan username & password kasir untuk membuka akses modul penjualan.' },
-            { name: 'Login Owner', key: 'login_owner', desc: 'Owner masuk untuk membuka dashboard laporan statistik dan pengelolaan stok.' },
-            { name: 'Login Gagal', key: 'login_gagal', desc: 'Form login mendeteksi input salah dan menampilkan pesan pop-up error secara real-time.' }
-        ]
-    },
-    'transaksi': {
-        title: 'Modul Transaksi POS',
-        steps: [
-            { name: 'Input Belanjaan', key: 'transaksi', desc: 'Kasir memasukkan barang ke keranjang belanja melalui daftar menu atau scan barcode.' },
-            { name: 'Pilih Metode Bayar', key: 'mtd_bayar', desc: 'Sistem memunculkan pilihan metode pembayaran (Tunai, QRIS, Bank Transfer).' },
-            { name: 'Metode QRIS', key: 'qris', desc: 'Sistem memunculkan kode QRIS dinamis yang siap dipindai oleh pembeli.' },
-            { name: 'Metode Transfer', key: 'transfer', desc: 'Sistem menampilkan nomor rekening bank tujuan transfer kepada pelanggan.' },
-            { name: 'Pembayaran Gagal', key: 'bayar_gagal', desc: 'Simulasi jika pembayaran mengalami kegagalan/timeout.' },
-            { name: 'Pembayaran Sukses', key: 'hasil_bayar', desc: 'Notifikasi konfirmasi bahwa transaksi sukses terverifikasi oleh database.' },
-            { name: 'Cetak Struk', key: 'cetak_struk', desc: 'Koneksi ke printer thermal kasir untuk mencetak struk bukti pembayaran fisik.' }
-        ]
-    },
-    'stok': {
-        title: 'Manajemen Stok',
-        steps: [
-            { name: 'Dashboard Owner', key: 'dashboard', desc: 'Dashboard utama owner yang memuat rangkuman total produk, stok, dan profit harian.' },
-            { name: 'Tabel Kelola Stok', key: 'stok', desc: 'Modul tabel inventori produk lengkap dengan fitur Edit, Hapus, dan Tambah produk baru.' }
-        ]
-    },
-    'laporan': {
-        title: 'Modul Laporan Keuangan',
-        steps: [
-            { name: 'Laporan Kasir', key: 'laporan', desc: 'Halaman peninjauan rekapan transaksi kasir yang bertugas pada shift aktif.' },
-            { name: 'Grafik Laporan Owner', key: 'laporanowner', desc: 'Modul laporan komprehensif milik Owner dengan filter range tanggal dan grafik tren penjualan.' }
-        ]
-    }
+const SIMULATOR_STEPS = [
+    // --- Autentikasi ---
+    { section: 'auth', name: 'Login Gagal', key: 'login_gagal', desc: 'Simulasi login kasir/owner gagal karena kesalahan username atau password.' },
+    { section: 'auth', name: 'Login Kasir', key: 'login_kasir', desc: 'Kasir berhasil login menggunakan username & password Kasir untuk membuka modul penjualan.' },
+    { section: 'auth', name: 'Login Owner', key: 'login_owner', desc: 'Owner login menggunakan akun Owner untuk membuka akses penuh ke kontrol manajerial.' },
+    
+    // --- Manajemen Stok ---
+    { section: 'stok', name: 'Dashboard Owner', key: 'dashboard', desc: 'Dashboard utama owner yang merangkum total produk, stok, dan profit harian.' },
+    { section: 'stok', name: 'Tabel Kelola Stok', key: 'stok', desc: 'Modul tabel kelola stok produk lengkap dengan fitur Edit, Hapus, dan Tambah produk baru.' },
+
+    // --- Transaksi ---
+    { section: 'transaksi', name: 'Input Belanjaan', key: 'transaksi', desc: 'Kasir memasukkan barang belanjaan ke keranjang belanja melalui daftar menu atau scan barcode.' },
+    { section: 'transaksi', name: 'Pilih Metode Bayar', key: 'mtd_bayar', desc: 'Sistem menampilkan pop-up pilihan metode pembayaran (Tunai, QRIS, Bank Transfer).' },
+    { section: 'transaksi', name: 'Metode QRIS', key: 'qris', desc: 'Sistem memunculkan kode QRIS dinamis yang siap dipindai oleh pelanggan.' },
+    { section: 'transaksi', name: 'Metode Transfer', key: 'transfer', desc: 'Sistem menampilkan nomor rekening bank tujuan transfer kepada pelanggan.' },
+    { section: 'transaksi', name: 'Pembayaran Gagal', key: 'bayar_gagal', desc: 'Simulasi kegagalan pembayaran karena saldo tidak cukup atau kendala jaringan.' },
+    { section: 'transaksi', name: 'Pembayaran Sukses', key: 'hasil_bayar', desc: 'Notifikasi konfirmasi bahwa transaksi sukses terverifikasi oleh database.' },
+    { section: 'transaksi', name: 'Cetak Struk', key: 'cetak_struk', desc: 'Koneksi ke printer thermal kasir untuk mencetak struk bukti pembayaran fisik.' },
+
+    // --- Laporan ---
+    { section: 'laporan', name: 'Laporan Kasir', key: 'laporan', desc: 'Halaman peninjauan rekapan transaksi harian oleh kasir yang bertugas.' },
+    { section: 'laporan', name: 'Grafik Laporan Owner', key: 'laporanowner', desc: 'Modul laporan keuangan komprehensif milik Owner dengan filter range tanggal dan grafik tren penjualan.' }
+];
+
+const SECTION_TITLES = {
+    'auth': 'Autentikasi User (Multi-Role)',
+    'stok': 'Manajemen Stok',
+    'transaksi': 'Modul Transaksi POS',
+    'laporan': 'Modul Laporan Keuangan'
 };
 
 /* =========================================================================
@@ -412,18 +406,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const simPrevBtn = document.getElementById('sim-prev-btn');
     const simNextBtn = document.getElementById('sim-next-btn');
 
-    let activeFlowKey = 'auth';
-    let activeStepIdx = 0;
+    let currentStepIdx = 0;
 
-    function loadSimulatorFlow(flowKey) {
-        activeFlowKey = flowKey;
-        activeStepIdx = 0;
-        const flowData = simulatorFlows[flowKey];
-
-        simStepsTitle.innerText = flowData.title;
+    function initSimulator() {
         simStepsContainer.innerHTML = '';
         
-        flowData.steps.forEach((step, idx) => {
+        SIMULATOR_STEPS.forEach((step, idx) => {
             const item = document.createElement('div');
             item.className = `simulator-step-item ${idx === 0 ? 'active' : ''}`;
             item.innerHTML = `
@@ -441,12 +429,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function renderSimulatorStep() {
-        const steps = simulatorFlows[activeFlowKey].steps;
-        const currentStep = steps[activeStepIdx];
+        const currentStep = SIMULATOR_STEPS[currentStepIdx];
 
         const stepItems = simStepsContainer.querySelectorAll('.simulator-step-item');
         stepItems.forEach((item, idx) => {
-            if (idx === activeStepIdx) {
+            if (idx === currentStepIdx) {
                 item.classList.add('active');
                 item.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
             } else {
@@ -458,33 +445,46 @@ document.addEventListener('DOMContentLoaded', () => {
         const imagePath = CONFIG_IMAGES[currentStep.key] || '';
         simScreenImg.src = imagePath;
         simScreenContainer.setAttribute('data-img-src', imagePath);
-        screenCurrentName.innerHTML = `${simulatorFlows[activeFlowKey].title} &bull; <span>${currentStep.name}</span>`;
+        screenCurrentName.innerHTML = `${SECTION_TITLES[currentStep.section]} &bull; <span>${currentStep.name}</span>`;
 
-        simPrevBtn.disabled = activeStepIdx === 0;
-        simNextBtn.disabled = activeStepIdx === steps.length - 1;
+        simPrevBtn.disabled = currentStepIdx === 0;
+        simNextBtn.disabled = currentStepIdx === SIMULATOR_STEPS.length - 1;
+
+        // Sync active flow selector button on the left
+        flowBtns.forEach(btn => {
+            if (btn.getAttribute('data-flow') === currentStep.section) {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
+            }
+        });
+
+        simStepsTitle.innerText = SECTION_TITLES[currentStep.section];
     }
 
     function selectSimulatorStep(idx) {
-        const steps = simulatorFlows[activeFlowKey].steps;
-        if (idx >= 0 && idx < steps.length) {
-            activeStepIdx = idx;
+        if (idx >= 0 && idx < SIMULATOR_STEPS.length) {
+            currentStepIdx = idx;
             renderSimulatorStep();
         }
     }
 
     flowBtns.forEach(btn => {
         btn.addEventListener('click', () => {
-            flowBtns.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            loadSimulatorFlow(btn.getAttribute('data-flow'));
+            const flow = btn.getAttribute('data-flow');
+            // Find first step in this section
+            const firstStepIdx = SIMULATOR_STEPS.findIndex(s => s.section === flow);
+            if (firstStepIdx !== -1) {
+                selectSimulatorStep(firstStepIdx);
+            }
         });
     });
 
-    simPrevBtn.addEventListener('click', () => selectSimulatorStep(activeStepIdx - 1));
-    simNextBtn.addEventListener('click', () => selectSimulatorStep(activeStepIdx + 1));
+    simPrevBtn.addEventListener('click', () => selectSimulatorStep(currentStepIdx - 1));
+    simNextBtn.addEventListener('click', () => selectSimulatorStep(currentStepIdx + 1));
 
     // Load default walkthrough flow
-    loadSimulatorFlow('auth');
+    initSimulator();
 
     /* =========================================================================
        7. DIAGRAM & SCREENSHOT CLICK-TO-ZOOM LIGHTBOX
