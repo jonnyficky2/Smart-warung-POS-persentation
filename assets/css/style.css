@@ -1488,3 +1488,94 @@ h1.slide-title-large span {
     font-weight: 700;
     box-shadow: 0 2px 0 rgba(0, 0, 0, 0.5);
 }
+
+/* -------------------------------------------------------------
+   17. RESPONSIVE DESIGN (TABLET & MOBILE)
+   ------------------------------------------------------------- */
+@media (max-width: 992px) {
+    body {
+        --sidebar-width: 70px !important;
+    }
+    .logo-text, .menu-title, .menu-item-text, .sidebar-footer {
+        display: none !important;
+    }
+    .submenu {
+        display: none !important;
+    }
+    .slide-middle-section, .project-structure-grid, .simulator-layout {
+        grid-template-columns: 1fr !important;
+    }
+    .home-title {
+        font-size: 36px;
+    }
+    .mobile-menu-btn {
+        display: none !important;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        --sidebar-width: 0px !important;
+        display: block;
+    }
+    aside {
+        position: fixed;
+        left: 0;
+        top: 0;
+        height: 100vh;
+        width: 280px !important;
+        transform: translateX(-100%);
+        z-index: 1000;
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 10px 0 30px rgba(0,0,0,0.8);
+    }
+    body.sidebar-open aside {
+        transform: translateX(0);
+    }
+    body.sidebar-open main {
+        pointer-events: none;
+        filter: brightness(0.5);
+    }
+    aside .logo-text, aside .menu-title, aside .menu-item-text, aside .sidebar-footer {
+        display: block !important;
+        opacity: 1 !important;
+        width: auto !important;
+    }
+    aside .submenu {
+        display: flex !important;
+    }
+    main {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100vw;
+        height: 100vh;
+    }
+    .slide {
+        padding: 20px 15px;
+        overflow-x: hidden;
+    }
+    .slide-header {
+        padding: 15px;
+    }
+    .home-title {
+        font-size: 28px;
+    }
+    .home-meta-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    .slide-title-large {
+        font-size: 22px;
+    }
+    .control-btn {
+        padding: 6px 10px;
+        font-size: 11px;
+    }
+    .slide-progress {
+        display: none;
+    }
+    .mobile-menu-btn {
+        display: inline-block !important;
+    }
+}

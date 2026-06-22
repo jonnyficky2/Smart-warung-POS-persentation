@@ -284,6 +284,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 const dir = slideIdx < currentSlideIndex ? 'prev' : 'next';
                 updateSlide(slideIdx, dir);
             }
+            if (window.innerWidth <= 768) {
+                document.body.classList.remove('sidebar-open');
+            }
         });
     });
 
@@ -295,6 +298,9 @@ document.addEventListener('DOMContentLoaded', () => {
             if (slideIdx !== -1) {
                 const dir = slideIdx < currentSlideIndex ? 'prev' : 'next';
                 updateSlide(slideIdx, dir);
+            }
+            if (window.innerWidth <= 768) {
+                document.body.classList.remove('sidebar-open');
             }
         });
     });
@@ -330,11 +336,30 @@ document.addEventListener('DOMContentLoaded', () => {
     // SIDEBAR COLLAPSE TOGGLE
     const toggleSidebarBtn = document.getElementById('toggle-sidebar');
     function toggleSidebar() {
-        document.body.classList.toggle('sidebar-collapsed');
-        const isCollapsed = document.body.classList.contains('sidebar-collapsed');
-        toggleSidebarBtn.style.transform = isCollapsed ? 'rotate(180deg)' : 'rotate(0deg)';
+        if (window.innerWidth <= 768) {
+            document.body.classList.toggle('sidebar-open');
+        } else {
+            document.body.classList.toggle('sidebar-collapsed');
+            const isCollapsed = document.body.classList.contains('sidebar-collapsed');
+            toggleSidebarBtn.style.transform = isCollapsed ? 'rotate(180deg)' : 'rotate(0deg)';
+        }
     }
     toggleSidebarBtn.addEventListener('click', toggleSidebar);
+
+    // Create mobile menu button dynamically
+    const breadcrumbs = document.querySelector('.slide-breadcrumbs');
+    if (breadcrumbs) {
+        const mobileMenuBtn = document.createElement('span');
+        mobileMenuBtn.innerHTML = '<svg viewBox="0 0 24 24" width="20" height="20" style="vertical-align: middle; stroke: currentColor; fill: none; stroke-width: 2.5; margin-right: 5px;"><path d="M3 12h18M3 6h18M3 18h18"/></svg>';
+        mobileMenuBtn.style.cursor = 'pointer';
+        mobileMenuBtn.style.display = 'none'; // Hidden by default, shown by CSS
+        mobileMenuBtn.classList.add('mobile-menu-btn');
+        mobileMenuBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleSidebar();
+        });
+        breadcrumbs.prepend(mobileMenuBtn);
+    }
 
     // BROWSER HASH SYNC
     window.addEventListener('hashchange', () => {
