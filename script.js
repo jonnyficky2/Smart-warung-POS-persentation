@@ -286,6 +286,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             if (window.innerWidth <= 768) {
                 document.body.classList.remove('sidebar-open');
+                document.querySelector('aside').classList.remove('active');
             }
         });
     });
@@ -301,6 +302,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             if (window.innerWidth <= 768) {
                 document.body.classList.remove('sidebar-open');
+                document.querySelector('aside').classList.remove('active');
             }
         });
     });
@@ -351,7 +353,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.appendChild(sidebarOverlay);
     
     sidebarOverlay.addEventListener('click', () => {
-        if (document.body.classList.contains('sidebar-open')) {
+        if (document.body.classList.contains('sidebar-open') || document.querySelector('aside').classList.contains('active')) {
             toggleSidebar();
         }
     });
@@ -359,6 +361,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function toggleSidebar() {
         if (window.innerWidth <= 768) {
             document.body.classList.toggle('sidebar-open');
+            document.querySelector('aside').classList.toggle('active');
         } else {
             document.body.classList.toggle('sidebar-collapsed');
             const isCollapsed = document.body.classList.contains('sidebar-collapsed');
