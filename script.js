@@ -322,6 +322,15 @@ document.addEventListener('DOMContentLoaded', () => {
         // Stop if image lightbox is open
         if (document.getElementById('lightbox').classList.contains('active')) return;
 
+        // Phase 2: Prevent keyboard navigation on inputs/scrollable
+        const target = e.target;
+        const isInput = target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable;
+        const isScrollable = target.scrollHeight > target.clientHeight || target.scrollWidth > target.clientWidth;
+        
+        if (isInput || (target !== document.body && isScrollable)) {
+            return;
+        }
+
         if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
             e.preventDefault();
             updateSlide(currentSlideIndex + 1, 'next');
@@ -335,6 +344,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // SIDEBAR COLLAPSE TOGGLE
     const toggleSidebarBtn = document.getElementById('toggle-sidebar');
+    
+    // Phase 2: Create sidebar overlay dynamically
+    const sidebarOverlay = document.createElement('div');
+    sidebarOverlay.className = 'sidebar-overlay';
+    document.body.appendChild(sidebarOverlay);
+    
+    sidebarOverlay.addEventListener('click', () => {
+        if (document.body.classList.contains('sidebar-open')) {
+            toggleSidebar();
+        }
+    });
+
     function toggleSidebar() {
         if (window.innerWidth <= 768) {
             document.body.classList.toggle('sidebar-open');
@@ -345,6 +366,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
     toggleSidebarBtn.addEventListener('click', toggleSidebar);
+
+    // Phase 2: Tablet Default State
+    // Auto-collapse sidebar on load for tablet screens (769px - 992px)
+    if (window.innerWidth > 768 && window.innerWidth <= 992) {
+        document.body.classList.add('sidebar-collapsed');
+        toggleSidebarBtn.style.transform = 'rotate(180deg)';
+    }
 
     // Create mobile menu button dynamically
     const breadcrumbs = document.querySelector('.slide-breadcrumbs');

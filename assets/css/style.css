@@ -30,7 +30,18 @@
     -webkit-user-drag: none;
 }
 
-/* Smooth Scrolling */
+/* Universal Image Responsiveness & Quality */
+img {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+    /* Maintain sharp quality when resizing */
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    border-style: none; /* remove legacy borders */
+}
+
+/* Base structural classes */
 html {
     scroll-behavior: smooth;
 }
@@ -539,7 +550,7 @@ body.nav-prev .slide.active {
 }
 
 h1.slide-title-large {
-    font-size: 36px;
+    font-size: clamp(22px, 3vw + 12px, 36px);
     font-weight: 800;
     line-height: 1.2;
     margin-bottom: 8px;
@@ -712,7 +723,7 @@ h1.slide-title-large span {
 }
 
 .home-title {
-    font-size: 54px;
+    font-size: clamp(28px, 5vw + 10px, 54px);
     font-weight: 900;
     line-height: 1.1;
     margin-bottom: 15px;
@@ -1493,20 +1504,11 @@ h1.slide-title-large span {
    17. RESPONSIVE DESIGN (TABLET & MOBILE)
    ------------------------------------------------------------- */
 @media (max-width: 992px) {
-    body {
-        --sidebar-width: 70px !important;
-    }
-    .logo-text, .menu-title, .menu-item-text, .sidebar-footer {
-        display: none !important;
-    }
-    .submenu {
-        display: none !important;
-    }
     .slide-middle-section, .project-structure-grid, .simulator-layout {
         grid-template-columns: 1fr !important;
     }
     .home-title {
-        font-size: 36px;
+        /* Removed rigid font-size override, handled by clamp() */
     }
     .mobile-menu-btn {
         display: none !important;
@@ -1529,6 +1531,29 @@ h1.slide-title-large span {
         transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         box-shadow: 10px 0 30px rgba(0,0,0,0.8);
     }
+    
+    .sidebar-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+    }
+    
+    body.sidebar-open .sidebar-overlay {
+        opacity: 1;
+        pointer-events: auto;
+    }
+    
+    body.sidebar-open {
+        overflow: hidden; /* Prevent body scroll */
+    }
+    
     body.sidebar-open aside {
         transform: translateX(0);
     }
@@ -1557,6 +1582,28 @@ h1.slide-title-large span {
         padding: 20px 15px;
         overflow-x: hidden;
     }
+    .slide-content {
+        height: auto !important;
+        min-height: 100%;
+    }
+    .unified-slide-layout {
+        height: auto !important;
+        min-height: 100%;
+    }
+    .simulator-layout {
+        height: auto !important;
+        min-height: 100%;
+    }
+    .simulator-screen {
+        min-height: 350px;
+    }
+    .code-viewer-container {
+        min-height: 400px;
+    }
+    .project-structure-grid {
+        height: auto !important;
+        min-height: 100%;
+    }
     .slide-header {
         padding: 15px;
         flex-wrap: wrap;
@@ -1566,14 +1613,14 @@ h1.slide-title-large span {
         grid-template-columns: 1fr;
     }
     .home-title {
-        font-size: 28px;
+        /* Removed rigid font-size override, handled by clamp() */
     }
     .home-meta-grid {
         grid-template-columns: 1fr;
         gap: 15px;
     }
     .slide-title-large {
-        font-size: 22px;
+        /* Removed rigid font-size override, handled by clamp() */
     }
     .control-btn {
         padding: 6px 10px;
@@ -1584,5 +1631,54 @@ h1.slide-title-large span {
     }
     .mobile-menu-btn {
         display: inline-block !important;
+    }
+}
+
+/* -------------------------------------------------------------
+   18. PHONE OPTIMIZATIONS (320px - 480px)
+   ------------------------------------------------------------- */
+@media (max-width: 480px) {
+    /* Avoid horizontal scrolling globally on small screens */
+    html, body {
+        overflow-x: hidden;
+    }
+    main, .slide, .slide-content {
+        padding-left: 10px;
+        padding-right: 10px;
+        width: 100%;
+        box-sizing: border-box;
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+    }
+    
+    /* Ensure flex and grid children can shrink below their content size */
+    * {
+        min-width: 0;
+    }
+    
+    /* Touch friendly minimum 44px targets */
+    button, 
+    .control-btn, 
+    .slide-nav-btn, 
+    .home-start-btn, 
+    .flow-btn, 
+    .screen-nav-btn, 
+    .lightbox-close-btn, 
+    .lightbox-tool-btn, 
+    .mobile-menu-btn, 
+    .toggle-sidebar-btn {
+        min-height: 44px !important;
+        min-width: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    /* Text readability tweaks */
+    .home-desc {
+        font-size: 15px;
+    }
+    .slide-desc {
+        font-size: 14px;
     }
 }
