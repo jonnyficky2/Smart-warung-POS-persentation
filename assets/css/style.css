@@ -162,6 +162,10 @@ aside {
     transition: var(--transition-smooth);
 }
 
+.sidebar-overlay {
+    display: none;
+}
+
 .sidebar-header {
     padding: 20px;
     display: flex;
@@ -358,6 +362,7 @@ body.sidebar-collapsed .sidebar-footer {
    6. MAIN VIEWER & FLOATING HEADER
    ------------------------------------------------------------- */
 main {
+    flex: 1; /* Fixes the collapsed width issue */
     position: relative;
     height: 100vh;
     display: flex;
@@ -1533,6 +1538,7 @@ h1.slide-title-large span {
     }
     
     .sidebar-overlay {
+        display: block;
         position: fixed;
         top: 0;
         left: 0;
