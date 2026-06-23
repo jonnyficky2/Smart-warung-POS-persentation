@@ -1578,4 +1578,36 @@ h1.slide-title-large span {
     .mobile-menu-btn {
         display: inline-block !important;
     }
+
+    /* --- MOBILE BUG FIXES --- */
+    body, main {
+        width: 100%;
+        max-width: 100vw;
+        overflow-x: hidden;
+        height: 100vh;
+        height: 100dvh;
+    }
+    .grid-cards {
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)) !important;
+    }
+    .slide-content {
+        margin: 0;
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+    .slide-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+    .slide-controls {
+        width: 100%;
+        justify-content: space-between;
+    }
+    .slide-breadcrumbs {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
 }
