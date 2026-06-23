@@ -3,7 +3,7 @@
    ========================================================================= */
 const CONFIG_IMAGES = {
     // --- Diagram UML ---
-    use_case: 'assets/use-case/use case.png',
+    use_case: 'assets/use-case/use_case.png',
     class_diagram: 'assets/class-diagram/class diagram.png',
     
     activity_login: 'assets/activity-diagram/Activity_Diagram_Login.drawio.png',

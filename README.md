@@ -84,7 +84,7 @@ As the presentation is a standalone, client-side web application, no compilation
 
 | Diagram | Preview |
 | --- | --- |
-| **Use Case Diagram** | ![Use Case](assets/use-case/use%20case.png) |
+| **Use Case Diagram** | ![Use Case](assets/use-case/use_case.png) |
 | **Class Diagram** | ![Class Diagram](assets/class-diagram/class%20diagram.png) |
 | **Activity Login** | ![Activity Login](assets/activity-diagram/Activity_Diagram_Login.drawio.png) |
 | **Sequence Pembayaran** | ![Sequence Pembayaran](assets/sequence-diagram/Sequence%20Diagram%20Pembayaran.png) |
