@@ -12,6 +12,19 @@
     <title>Presentasi Smart Warung POS - Rekayasa Perangkat Lunak</title>
     <!-- Hubungkan ke Style Sheet Lokal -->
     <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        /* Fix mobile horizontal overflow and shifting */
+        @media (max-width: 768px) {
+            html, body { overflow-x: hidden !important; width: 100vw !important; position: relative; }
+            main { width: 100vw !important; overflow-x: hidden !important; }
+            .slide { max-width: 100vw !important; box-sizing: border-box !important; }
+            aside { max-width: 80vw !important; }
+        }
+        /* Custom list styling for Sequence Diagrams */
+        .custom-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
+        .custom-list li { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: var(--text-secondary); line-height: 1.5; }
+        .custom-list svg { flex-shrink: 0; width: 18px; height: 18px; stroke: var(--accent-green); fill: none; stroke-width: 2.5; margin-top: 2px; }
+    </style>
 </head>
 
 <body>
@@ -615,10 +628,29 @@
                                 class="large-display-img">
                         </div>
                         <div class="slide-text-card">
-                            <h3>Interaksi Sekuensial</h3>
-                            <p>Menggambarkan bagaimana objek `LoginForm` (Boundary), `AuthController` (Control), dan
-                                tabel `User` (Entity) berinteraksi untuk melakukan pengecekan hashing password sebelum
-                                memberikan otorisasi dashboard.</p>
+                            <h3>Alur Proses Login</h3>
+                            <ul class="custom-list">
+                                <li>
+                                    <svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" /></svg>
+                                    <span>User memasukkan username dan password.</span>
+                                </li>
+                                <li>
+                                    <svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" /></svg>
+                                    <span>Sistem menerima data login.</span>
+                                </li>
+                                <li>
+                                    <svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" /></svg>
+                                    <span>Sistem melakukan validasi username dan password.</span>
+                                </li>
+                                <li>
+                                    <svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" /></svg>
+                                    <span>Jika data benar, sistem mengarahkan ke dashboard.</span>
+                                </li>
+                                <li>
+                                    <svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12" stroke="currentColor" fill="none" stroke-width="2.5"/></svg>
+                                    <span>Jika data salah, sistem menampilkan pesan error.</span>
+                                </li>
+                            </ul>
                         </div>
                     </div>
 
@@ -651,10 +683,37 @@
                                 class="large-display-img">
                         </div>
                         <div class="slide-text-card">
-                            <h3>Interaksi Sekuensial</h3>
-                            <p>Visualisasi urutan pemanggilan API checkout belanja: penambahan item, kalkulasi sisa stok
-                                barang pada database, penyimpanan data pembayaran transaksi, hingga output respons cetak
-                                bukti struk fisik.</p>
+                            <h3>Alur Proses Penjualan</h3>
+                            <ul class="custom-list">
+                                <li>
+                                    <svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" /></svg>
+                                    <span>Kasir memasukkan barcode barang.</span>
+                                </li>
+                                <li>
+                                    <svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" /></svg>
+                                    <span>Sistem mencari data barang.</span>
+                                </li>
+                                <li>
+                                    <svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" /></svg>
+                                    <span>Sistem menampilkan informasi barang.</span>
+                                </li>
+                                <li>
+                                    <svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" /></svg>
+                                    <span>Barang dimasukkan ke keranjang.</span>
+                                </li>
+                                <li>
+                                    <svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" /></svg>
+                                    <span>Kasir memilih metode pembayaran.</span>
+                                </li>
+                                <li>
+                                    <svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" /></svg>
+                                    <span>Sistem memproses pembayaran dan mencetak struk.</span>
+                                </li>
+                                <li>
+                                    <svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" /></svg>
+                                    <span>Sistem mengurangi stok barang.</span>
+                                </li>
+                            </ul>
                         </div>
                     </div>
 
