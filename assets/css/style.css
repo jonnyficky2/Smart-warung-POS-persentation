@@ -1509,9 +1509,6 @@ h1.slide-title-large span {
    17. RESPONSIVE DESIGN (TABLET & MOBILE)
    ------------------------------------------------------------- */
 @media (max-width: 992px) {
-    .slide-middle-section, .project-structure-grid, .simulator-layout {
-        grid-template-columns: 1fr !important;
-    }
     .home-title {
         /* Removed rigid font-size override, handled by clamp() */
     }
@@ -1588,7 +1585,7 @@ h1.slide-title-large span {
         position: absolute;
         left: 0;
         top: 0;
-        width: 100vw !important;
+        width: 100% !important;
         margin-left: 0 !important;
         height: 100vh;
         height: 100dvh;
@@ -1597,7 +1594,7 @@ h1.slide-title-large span {
     .slide {
         padding: 20px 15px;
         overflow-x: hidden;
-        width: 100vw !important;
+        width: 100% !important;
         max-width: 100% !important;
         margin-left: 0 !important;
     }
@@ -1651,29 +1648,14 @@ h1.slide-title-large span {
         min-height: 100%;
     }
     .slide-header {
-        padding: 15px;
-        flex-wrap: wrap;
-        gap: 10px;
-    }
-    .grid-cards {
-        grid-template-columns: 1fr;
+        padding: 15px 30px;
     }
     .home-title {
         /* Removed rigid font-size override, handled by clamp() */
     }
-    .home-meta-grid {
-        grid-template-columns: 1fr;
-        gap: 15px;
-    }
-    .slide-title-large {
-        /* Removed rigid font-size override, handled by clamp() */
-    }
     .control-btn {
-        padding: 6px 10px;
-        font-size: 11px;
-    }
-    .slide-progress {
-        display: none;
+        padding: 8px 16px;
+        font-size: 13px;
     }
     .mobile-menu-btn {
         display: none !important; /* Disembunyikan karena sudah menggunakan FAB #toggle-sidebar */
@@ -1691,9 +1673,9 @@ h1.slide-title-large span {
     html, body {
         overflow-x: hidden;
     }
-    main, .slide, .slide-content {
-        padding-left: 10px;
-        padding-right: 10px;
+    main, .slide {
+        padding-left: 20px;
+        padding-right: 20px;
         width: 100%;
         box-sizing: border-box;
         overflow-wrap: break-word;
@@ -1729,5 +1711,52 @@ h1.slide-title-large span {
     }
     .slide-desc {
         font-size: 14px;
+    }
+}
+
+/* --- FIX FOR MOBILE SHIFT AND BUTTON ALIGNMENT --- */
+@media (max-width: 768px) {
+    /* Prevent Prev/Next from dropping to new line */
+    .slide-header {
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        padding: 10px 15px !important;
+    }
+    .slide-breadcrumbs {
+        white-space: nowrap !important;
+        font-size: 13px !important;
+        margin-right: 15px;
+    }
+    .slide-controls {
+        flex-shrink: 0 !important;
+    }
+    
+    /* Ensure content fits without horizontal scroll and no left shift */
+    html, body, main {
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow-x: hidden !important;
+    }
+    
+    /* Restrict slide dimensions carefully */
+    .slide {
+        padding: 20px 15px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin-left: 0 !important;
+        box-sizing: border-box !important;
+    }
+    
+    .slide-content {
+        padding: 0 !important;
+        margin: 0 auto !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+    
+    /* Force single column for cards on mobile to prevent stretching */
+    .slide-middle-section, .project-structure-grid, .simulator-layout, .grid-cards {
+        grid-template-columns: 1fr !important;
     }
 }
